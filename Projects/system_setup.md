@@ -1,21 +1,21 @@
-System Setup 
+System Setup and OS 
 --------------------------
 
-- [ ] Shakirah OmotayoAbdullah Doaa
-- [ ] Alrahhal Hosam
-- [ ] Casimsiman Aileen
-- [ ] Dizon Jonel
-- [ ] Doctor Jesal
-- [ ] El Shaar Sulaf
-- [ ] Habach Rana
-- [ ] Huang Wei (Tina)
-- [ ] KAUR SUKHDEEP
-- [ ] MAHAJAN SHAMA
-- [ ] Mulmule Priti
-- [ ] Osineye Suaib
-- [ ] Patel Shail
-- [ ] Sehdev Roohani
-- [ ] SINGH JATINDER
-- [ ] Usmani Mohmadrizwan
-- [ ] Vohra Shefali
-- [ ] Zghoul Ahmad
+- [ ] Shakirah OmotayoAbdullah Doaa (Windows - VS2019)
+- [ ] Alrahhal Hosam (Windows - VS2019)
+- [ ] Casimsiman Aileen (Windows - VS2019)
+- [ ] Dizon Jonel (Windows - VS2019)
+- [ ] Doctor Jesal (Windows - VS2019)
+- [ ] El Shaar Sulaf (Windows - VS2019)
+- [ ] Habach Rana (Windows - VS2019)
+- [ ] Huang Wei [Tina] (Windows - VS2019)
+- [ ] KAUR SUKHDEEP (Windows - VS2019)
+- [ ] MAHAJAN SHAMA (Windows - VS2019)
+- [ ] Mulmule Priti (Windows - VS2019)
+- [ ] Osineye Suaib (Windows - VS2019)
+- [ ] Patel Shail (Windows - VS2019)
+- [ ] Sehdev Roohani (Windows - VS2019)
+- [ ] SINGH JATINDER (Windows - VS2019)
+- [ ] Usmani Mohmadrizwan (Windows - VS2019)
+- [ ] Vohra Shefali (Windows - VS2019)
+- [ ] Zghoul Ahmad (Windows - VS2019)

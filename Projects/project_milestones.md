@@ -10,13 +10,13 @@ Project Milestones
 - [ ] El Shaar Sulaf
 - [ ] Habach Rana
 - [ ] Huang Wei (Tina)
-- [ ] KAUR SUKHDEEP
-- [ ] MAHAJAN SHAMA
+- [ ] Kaur Sukhdeep
+- [ ] Mahajan Shama
 - [ ] Mulmule Priti
 - [ ] Osineye Suaib
 - [ ] Patel Shail
 - [ ] Sehdev Roohani
-- [ ] SINGH JATINDER
+- [ ] Singh Jatinder
 - [ ] Usmani Mohmadrizwan
 - [ ] Vohra Shefali
 - [ ] Zghoul Ahmad
@@ -30,13 +30,13 @@ Project Milestones
 - [ ] El Shaar Sulaf
 - [ ] Habach Rana
 - [ ] Huang Wei (Tina)
-- [ ] KAUR SUKHDEEP
-- [ ] MAHAJAN SHAMA
+- [ ] Kaur Sukhdeep
+- [ ] Mahajan Shama
 - [ ] Mulmule Priti
 - [ ] Osineye Suaib
 - [ ] Patel Shail
 - [ ] Sehdev Roohani
-- [ ] SINGH JATINDER
+- [ ] Singh Jatinder
 - [ ] Usmani Mohmadrizwan
 - [ ] Vohra Shefali
 - [ ] Zghoul Ahmad

@@ -1,4 +1,4 @@
-System Setup and OS 
+System Setup, OS, GitHub 
 --------------------------
 
 - [ ] Shakirah OmotayoAbdullah Doaa (Windows - VS2019)

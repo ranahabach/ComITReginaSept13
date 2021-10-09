@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MusicStore.Common\MusicStore.Common.csproj" />
+    <ProjectReference Include="..\MusicStore.Db\MusicStore.Db.csproj" />
+  </ItemGroup>
+
+</Project>

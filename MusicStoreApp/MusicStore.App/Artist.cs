@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace MusicStore.App
 {
     public class Artist
@@ -13,6 +15,11 @@ namespace MusicStore.App
         {
             _firstName = firstName;
             _lastName = lastName;
+        }
+
+        public void Play(string song, int temp0)
+        {
+            Console.WriteLine("I am playing at a different tempo");
         }
     }
 }

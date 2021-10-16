@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace MusicStore.App
 {
     public class Artist
@@ -13,6 +15,16 @@ namespace MusicStore.App
         {
             _firstName = firstName;
             _lastName = lastName;
+        }
+
+        public void Play(string song)
+        {
+            Console.WriteLine("Playing" + song);
+        }
+
+        public void Practice()
+        {
+            Console.WriteLine("Practicing ....");
         }
     }
 }

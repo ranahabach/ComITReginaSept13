@@ -1,5 +1,5 @@
 
-# Project: Music Online Store
+# Project: Online Music Store
 
 ## Features:
 - The store will have a home page that features new artist, new songs and industry news like events, concerts and so on.

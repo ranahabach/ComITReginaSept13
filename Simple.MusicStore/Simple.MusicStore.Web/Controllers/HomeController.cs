@@ -6,33 +6,30 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Simple.MusicStore.Web.Services;
 
 namespace MusicStore2.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly UserService _userService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(
+            ILogger<HomeController> logger, 
+            UserService userService)
         {
             _logger = logger;
+            _userService = userService;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            var users = _userService.GetAll();
 
-        public IActionResult Carlos()
-        {
-            return View();
+            return View(users);
         }
-
-        public IActionResult Cart()
-        {
-            return View();
-        }
-
+        
         public IActionResult Privacy()
         {
             return View();

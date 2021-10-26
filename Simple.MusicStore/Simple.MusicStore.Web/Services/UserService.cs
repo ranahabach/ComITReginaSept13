@@ -7,7 +7,7 @@ using MusicStore2.Web.Models;
 namespace Simple.MusicStore.Web.Services
 {
     /*
-    It deal with user actions 
+    It deal with userModel actions 
     - find users 
     - deleting users 
     - adding users 
@@ -15,28 +15,41 @@ namespace Simple.MusicStore.Web.Services
     */
     public class UserService
     {
-        private readonly List<User> _users;
+        private readonly List<UserModel> _users;
 
         public UserService()
         {
-            _users = new List<User>();
+            _users = new List<UserModel>();
         }
 
-        public void Add(User user)
+        public void Add(UserModel userModel)
         {
-            if (user.Id != 0)
+            if (userModel.Id != 0)
             {
                 // error 
                 return;
 
             }
 
-            user.Id = new Random(DateTime.Now.Millisecond).Next();
+            userModel.Id = new Random(DateTime.Now.Millisecond).Next();
 
-            _users.Add(user);
+            _users.Add(userModel);
         }
 
-        public User[] GetAll()
+        public UserModel Find(string emailAddress)
+        {
+            for (var i = 0; i < _users.Count; i++)
+            {
+                if (_users[i].EmailAddress == emailAddress)
+                {
+                    return _users[i];
+                }
+            }
+
+            return null;
+        }
+
+        public UserModel[] GetAll()
         {
             return _users.ToArray();
         }

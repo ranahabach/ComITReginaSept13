@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Simple.MusicStore.Web.Services;
 
 namespace MusicStore2.Web.Controllers
@@ -30,6 +31,7 @@ namespace MusicStore2.Web.Controllers
             return View(users);
         }
         
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();

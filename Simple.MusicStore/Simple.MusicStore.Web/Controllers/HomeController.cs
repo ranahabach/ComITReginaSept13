@@ -27,7 +27,8 @@ namespace MusicStore2.Web.Controllers
         public IActionResult Index()
         {
             var users = _userService.GetAll();
-
+            this.ViewData["Title"] = "This my title";
+            this.ViewData["IsLoggedIn"] = true;
             return View(users);
         }
         

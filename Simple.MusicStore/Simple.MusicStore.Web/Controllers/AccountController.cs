@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using MusicStore2.Web.Models;
 using Simple.MusicStore.Web.Models;
 using Simple.MusicStore.Web.Services;
@@ -44,7 +47,7 @@ namespace MusicStore2.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
             var user = _userService.Find(model.EmailAddress);
 
@@ -66,13 +69,24 @@ namespace MusicStore2.Web.Controllers
             }
 
             // Login the user to application 
+            var claims = new List<Claim>();  
+            claims.Add(new Claim("FirstName","Lolo"));
+            claims.Add(new Claim("LastName","Perez"));
+            claims.Add(new Claim("EmailAddress", "admin@musicstore.com"));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, "admin@musicstore.com"));
+
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
             
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return RedirectToAction("Login");
         }
     }
 }

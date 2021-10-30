@@ -20,6 +20,15 @@ namespace Simple.MusicStore.Web.Services
         public UserService()
         {
             _users = new List<UserModel>();
+
+            _users.Add(new UserModel()
+            {
+                EmailAddress = "admin@musicstore.com",
+                FirstName = "Lolo",
+                LastName = "Perez",
+                Id = 1,
+                Password = "password"
+            });
         }
 
         public void Add(UserModel userModel)

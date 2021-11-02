@@ -53,31 +53,31 @@ namespace MusicStore2.Web.Controllers
 
             if (user == null)
             {
-                var errorModel = new LoginModel();
-                errorModel.IsError = true;
-                errorModel.ErrorMessage = "Could not find the email address in our database";
+                var errorModel = new LoginModel
+                {
+                    IsError = true,
+                    ErrorMessage = "Could not find the email address in our database"
+                };
+
                 return View(errorModel);
             }
 
             // check the password 
             if (model.Password != user.Password)
             {
-                var errorModel = new LoginModel();
-                errorModel.IsError = true;
-                errorModel.ErrorMessage = "The user password is wrong";
+                var errorModel = new LoginModel
+                {
+                    IsError = true,
+                    ErrorMessage = "The user password is wrong"
+                };
+
                 return View(errorModel);
             }
 
             // Login the user to application 
-            var claims = new List<Claim>();  
-            claims.Add(new Claim("FirstName","Lolo"));
-            claims.Add(new Claim("LastName","Perez"));
-            claims.Add(new Claim("EmailAddress", "admin@musicstore.com"));
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, "admin@musicstore.com"));
-
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            await HttpContext.SignInAsync(new ClaimsPrincipal(identity));
+            var principal = _userService.CreateUserPrincipal(user, CookieAuthenticationDefaults.AuthenticationScheme);
+            
+            await HttpContext.SignInAsync(principal);
             
             return RedirectToAction("Index", "Home");
         }
@@ -86,7 +86,7 @@ namespace MusicStore2.Web.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

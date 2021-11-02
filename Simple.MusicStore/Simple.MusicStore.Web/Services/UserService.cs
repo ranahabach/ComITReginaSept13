@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using MusicStore2.Web.Models;
 
@@ -61,6 +62,23 @@ namespace Simple.MusicStore.Web.Services
         public UserModel[] GetAll()
         {
             return _users.ToArray();
+        }
+
+        public ClaimsPrincipal CreateUserPrincipal(UserModel user, string scheme)
+        {
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
+                new Claim(ClaimTypes.Email,user.EmailAddress),
+                new Claim(ClaimTypes.AuthenticationMethod, "Native"),
+            };
+
+            var identity = new ClaimsIdentity(claims, scheme);
+
+            return new ClaimsPrincipal(identity);
         }
     }
 }

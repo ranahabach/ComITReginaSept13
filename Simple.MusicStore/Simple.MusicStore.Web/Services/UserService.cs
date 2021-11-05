@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using MusicStore2.Web.Models;
+using Simple.MusicStore.Web.Models;
 
 namespace Simple.MusicStore.Web.Services
 {

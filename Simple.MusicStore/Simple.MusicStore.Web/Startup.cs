@@ -1,17 +1,14 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
+using Simple.MusicStore.Web.Data;
 using Simple.MusicStore.Web.Services;
 
-namespace MusicStore2.Web
+namespace Simple.MusicStore.Web
 {
     public class Startup
     {
@@ -25,6 +22,10 @@ namespace MusicStore2.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MusicStoreDbContext>(
+                option => option.UseSqlServer(Configuration.GetConnectionString("LocalDbConnection")));
+
+            services.AddScoped<ArtistService>();
             services.AddSingleton<UserService>();
             services.AddControllersWithViews();
             services.AddAuthentication(options =>

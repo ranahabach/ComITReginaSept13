@@ -1,6 +1,4 @@
-using System;
-
-namespace MusicStore2.Web.Models
+namespace Simple.MusicStore.Web.Models
 {
     public class ErrorViewModel
     {

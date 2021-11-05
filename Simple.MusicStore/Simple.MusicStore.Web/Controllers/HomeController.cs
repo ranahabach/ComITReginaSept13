@@ -1,35 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using MusicStore2.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Simple.MusicStore.Web.Models;
 using Simple.MusicStore.Web.Services;
 
-namespace MusicStore2.Web.Controllers
+namespace Simple.MusicStore.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserService _userService;
+        private readonly ArtistService _artistService;
 
         public HomeController(
             ILogger<HomeController> logger, 
-            UserService userService)
+            UserService userService,
+            ArtistService artistService)
         {
             _logger = logger;
             _userService = userService;
+            _artistService = artistService;
         }
 
         public IActionResult Index()
         {
             var users = _userService.GetAll();
+            var artist = _artistService.GetAll();
             this.ViewData["Title"] = "This my title";
             this.ViewData["IsLoggedIn"] = true;
-            return View(users);
+            return View(artist);
         }
         
         [Authorize]

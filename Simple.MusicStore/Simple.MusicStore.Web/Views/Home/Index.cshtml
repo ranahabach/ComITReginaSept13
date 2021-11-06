@@ -1,13 +1,22 @@
-﻿@model UserModel[]
+﻿@model HomePageModel
 @{
     ViewData["Title"] = "Home Page";
+    var previousPage = Model.PageNumber--;
+    var nextPage = Model.PageNumber++;
 }
 <img src="/img/music_store_logo.png" />
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-@if (Model.Length == 0)
+<form method="post">
+    <input type="text" name="search" />
+    <input type="submit" value="Search" />
+    <input type="hidden" name="page" value="@Model.PageNumber"/>
+</form>
+<a href="@Url.Action("Index", new { Page = previousPage  })" class="btn btn-primary">Previous Page</a>&nbsp;&nbsp;&nbsp;
+<a href="@Url.Action("Index", new { Page = nextPage  })" class="btn btn-primary">Next Page</a>
+@if (!Model.Artists.Any())
 {
     <p>No records found</p>
 }
@@ -17,20 +26,19 @@ else
         <thead>
             <tr>
                 <th scope="col">Id</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email Address</th>
+                <th scope="col">Name</th>
+                <th scope="col">Albums</th>
+                @* <th scope="col">Email Address</th> *@
             </tr>
         </thead>
         <tbody>
-            @for (var i = 0; i < Model.Length; i++)
+            @foreach (var artist in Model.Artists)
             {
-                var user = Model[i];
                 <tr>
-                    <th scope="row">@user.Id</th>
-                    <td>@user.FirstName</td>
-                    <td>@user.LastName</td>
-                    <td>@user.EmailAddress</td>
+                    <th scope="row">@artist.Id</th>
+                    <td>@artist.Name</td>
+                    <td>@artist.Albums.Count</td>
+                    @* <td>@user.EmailAddress</td> *@
                 </tr>
             }
 

@@ -1,16 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using MusicStore2.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 using Simple.MusicStore.Web.Models;
 using Simple.MusicStore.Web.Services;
 
-namespace MusicStore2.Web.Controllers
+namespace Simple.MusicStore.Web.Controllers
 {
     public class AccountController : Controller
     {

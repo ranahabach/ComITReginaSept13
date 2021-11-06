@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace MusicStore2.Web.Models
+﻿namespace Simple.MusicStore.Web.Models
 {
     public class UserModel
     {
@@ -19,4 +15,5 @@ namespace MusicStore2.Web.Models
         */
         public string Password { get; set; }
     }
+   
 }

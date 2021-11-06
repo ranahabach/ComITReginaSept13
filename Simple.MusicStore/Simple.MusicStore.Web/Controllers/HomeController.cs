@@ -1,37 +1,50 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using MusicStore2.Web.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Simple.MusicStore.Web.Models;
 using Simple.MusicStore.Web.Services;
 
-namespace MusicStore2.Web.Controllers
+namespace Simple.MusicStore.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserService _userService;
+        private readonly ArtistService _artistService;
 
         public HomeController(
             ILogger<HomeController> logger, 
-            UserService userService)
+            UserService userService,
+            ArtistService artistService
+            )
         {
             _logger = logger;
             _userService = userService;
+            _artistService = artistService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(int page = 1)
         {
-            var users = _userService.GetAll();
-            this.ViewData["Title"] = "This my title";
-            this.ViewData["IsLoggedIn"] = true;
-            return View(users);
+            // this.ViewData["Title"] = "This my title";
+            // this.ViewData["IsLoggedIn"] = true;
+            // var users = _userService.GetAll();
+            
+            var artists = _artistService.GetAll();
+            var model = new HomePageModel() { Artists = artists, PageNumber = page };
+            return View(model);
         }
-        
+
+        [HttpPost]
+        public IActionResult Index(string search, int page)
+        {
+            var artists = _artistService.GetAllMatching(search);
+            var model = new HomePageModel() { Artists = artists, PageNumber = page };
+            return View(model);
+        }
+
         [Authorize]
         public IActionResult Privacy()
         {

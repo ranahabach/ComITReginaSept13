@@ -151,6 +151,15 @@ CREATE TABLE [dbo].[Track]
     CONSTRAINT [PK_Track] PRIMARY KEY CLUSTERED ([TrackId])
 );
 GO
+CREATE TABLE [dbo].[User]
+(
+    [UserId] INT NOT NULL,
+    [LastName] NVARCHAR(20) NOT NULL,
+    [FirstName] NVARCHAR(20) NOT NULL,
+    [Email] NVARCHAR(60),
+    CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([UserId])
+);
+GO
 
 
 /*******************************************************************************

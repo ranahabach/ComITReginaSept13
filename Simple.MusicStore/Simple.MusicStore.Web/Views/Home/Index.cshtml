@@ -1,8 +1,6 @@
 ﻿@model HomePageModel
 @{
     ViewData["Title"] = "Home Page";
-    var previousPage = Model.PageNumber--;
-    var nextPage = Model.PageNumber++;
 }
 <img src="/img/music_store_logo.png" />
 <div class="text-center">
@@ -10,12 +8,28 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 <form method="post">
-    <input type="text" name="search" />
-    <input type="submit" value="Search" />
-    <input type="hidden" name="page" value="@Model.PageNumber"/>
+    <div class="row">
+        <div class="col-10">
+            <input type="text" name="search" class="form-control" />
+        </div>
+        <div class="col-2">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+        <input type="hidden" name="page" value="@Model.CurrentPage" />
+
+    </div>
 </form>
-<a href="@Url.Action("Index", new { Page = previousPage  })" class="btn btn-primary">Previous Page</a>&nbsp;&nbsp;&nbsp;
-<a href="@Url.Action("Index", new { Page = nextPage  })" class="btn btn-primary">Next Page</a>
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="col-2">
+        <a href="@Url.Action("Index", new { Page = Model.PreviousPage })" class="btn btn-outline-primary">Previous Page</a>
+    </div>
+    <div class="col-8"></div>
+    <div class="col-2">
+        <a href="@Url.Action("Index", new { Page = Model.NextPage })" class="btn btn-outline-primary">Next Page</a>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
 @if (!Model.Artists.Any())
 {
     <p>No records found</p>
@@ -35,9 +49,9 @@ else
             @foreach (var artist in Model.Artists)
             {
                 <tr>
-                    <th scope="row">@artist.Id</th>
+                    <th scope="row">@artist.ArtistId</th>
                     <td>@artist.Name</td>
-                    <td>@artist.Albums.Count</td>
+                    <td>@artist.Album.Count</td>
                     @* <td>@user.EmailAddress</td> *@
                 </tr>
             }

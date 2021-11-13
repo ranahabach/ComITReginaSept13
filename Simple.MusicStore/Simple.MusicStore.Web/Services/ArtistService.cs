@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Simple.MusicStore.Tools.Data;
 using Simple.MusicStore.Web.Data;
 using Simple.MusicStore.Web.Models;
 
@@ -19,7 +20,7 @@ namespace Simple.MusicStore.Web.Services
         
         public IEnumerable<Artist> GetAll()
         { 
-            var all = _context.Artists.Include(a => a.Albums).ToList();
+            var all = _context.Artist.Include(a => a.Album).ToList();
             return all;
         }
 
@@ -28,19 +29,35 @@ namespace Simple.MusicStore.Web.Services
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
                 return _context
-                    .Artists
+                    .Artist
                     .Take(PAGE_SIZE)
-                    .Include(a => a.Albums)
+                    .Include(a => a.Album)
+                    .Where(a => a.Name == "Carlos")
                     .ToList();
             }
 
             var all = _context
-                .Artists
+                .Artist
                 .Where(a => a.Name.Contains(searchTerm))
-                .Include(a => a.Albums)
+                .Include(a => a.Album)
                 .ToList();
 
             return all;
+        }
+
+        public IEnumerable<Artist> GetPage(int page)
+        {
+            if (page < 1)
+            {
+                page = 1;
+            }
+
+            return _context
+                .Artist
+                .Skip((page - 1) * PAGE_SIZE)
+                .Take(PAGE_SIZE)
+                .Include(a => a.Album)
+                .ToList();
         }
     }
 }

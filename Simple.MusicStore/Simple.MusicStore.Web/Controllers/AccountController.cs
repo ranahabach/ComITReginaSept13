@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Simple.MusicStore.Tools.Data;
 using Simple.MusicStore.Web.Models;
 using Simple.MusicStore.Web.Services;
 
@@ -24,15 +25,30 @@ namespace Simple.MusicStore.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterModel());
         }
 
         [HttpPost]
-        public IActionResult Register(UserModel userModel)
+        public IActionResult Register(User userModel)
         {
+            if (!_userService.IsValidPassword(userModel.Password))
+            {
+                var errorModel = new RegisterModel
+                {
+                    IsError = true,
+                    ErrorMessage = "The password is not valid, it must contain a number and capital more than 6 characters",
+                    FirstName = userModel.FirstName,
+                    LastName = userModel.LastName,
+                    Email = userModel.Email,
+                    Password = userModel.Password,
+                };
+
+                return View(errorModel);
+            }
+
             _userService.Add(userModel);
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -51,7 +67,9 @@ namespace Simple.MusicStore.Web.Controllers
                 var errorModel = new LoginModel
                 {
                     IsError = true,
-                    ErrorMessage = "Could not find the email address in our database"
+                    ErrorMessage = "Could not find the email address in our database",
+                    EmailAddress = model.EmailAddress,
+                    Password = model.Password
                 };
 
                 return View(errorModel);

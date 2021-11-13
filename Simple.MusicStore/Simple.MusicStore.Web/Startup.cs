@@ -26,7 +26,7 @@ namespace Simple.MusicStore.Web
                 option => option.UseSqlServer(Configuration.GetConnectionString("LocalDbConnection")));
 
             services.AddScoped<ArtistService>();
-            services.AddSingleton<UserService>();
+            services.AddScoped<UserService>();
             services.AddControllersWithViews();
             services.AddAuthentication(options =>
             {

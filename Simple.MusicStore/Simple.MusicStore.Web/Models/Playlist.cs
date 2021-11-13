@@ -6,16 +6,16 @@ using System.Collections.Generic;
 
 namespace Simple.MusicStore.Tools.Data
 {
-    public partial class Artist
+    public partial class Playlist
     {
-        public Artist()
+        public Playlist()
         {
-            Album = new HashSet<Album>();
+            PlaylistTrack = new HashSet<PlaylistTrack>();
         }
 
-        public int ArtistId { get; set; }
+        public int PlaylistId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<Album> Album { get; set; }
+        public virtual ICollection<PlaylistTrack> PlaylistTrack { get; set; }
     }
 }

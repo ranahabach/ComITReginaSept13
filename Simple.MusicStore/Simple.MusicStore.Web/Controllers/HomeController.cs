@@ -31,17 +31,35 @@ namespace Simple.MusicStore.Web.Controllers
             // this.ViewData["Title"] = "This my title";
             // this.ViewData["IsLoggedIn"] = true;
             // var users = _userService.GetAll();
+            if (page < 1) page = 1;
             
-            var artists = _artistService.GetAll();
-            var model = new HomePageModel() { Artists = artists, PageNumber = page };
+            var artists = _artistService.GetPage(page).ToList();
+            var total = artists.Count();
+            var model = new HomePageModel()
+            {
+                Artists = artists, 
+                CurrentPage = page,
+                NextPage = total == 10 ? page + 1 : page,
+                PreviousPage = page - 1 == 0 ? 1 : page - 1,
+                TotalPages = 25
+            };
+
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Index(string search, int page)
         {
-            var artists = _artistService.GetAllMatching(search);
-            var model = new HomePageModel() { Artists = artists, PageNumber = page };
+            var artists = _artistService.GetAllMatching(search).ToList();
+            var model = new HomePageModel()
+            {
+                Artists = artists,
+                CurrentPage = 1,
+                NextPage = 2,
+                PreviousPage = 1,
+                TotalPages = 25
+            };
+
             return View(model);
         }
 

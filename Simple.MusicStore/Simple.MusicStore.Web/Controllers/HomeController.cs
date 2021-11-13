@@ -63,7 +63,7 @@ namespace Simple.MusicStore.Web.Controllers
             return View(model);
         }
 
-        [Authorize]
+        [Authorize(Roles="Admin")]
         public IActionResult Privacy()
         {
             return View();

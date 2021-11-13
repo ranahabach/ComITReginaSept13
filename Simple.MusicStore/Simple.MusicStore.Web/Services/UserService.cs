@@ -95,9 +95,20 @@ namespace Simple.MusicStore.Web.Services
                 new Claim(ClaimTypes.AuthenticationMethod, "Native"),
             };
 
-            var identity = new ClaimsIdentity(claims, scheme);
+            if (user.Email == "admin@musicstore.com")
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+            }
+            else
+            {
+                claims.Add(new Claim(ClaimTypes.Role, "User"));
+            }
 
-            return new ClaimsPrincipal(identity);
+            var identity = new ClaimsIdentity(claims, scheme);
+            
+            var principal =  new ClaimsPrincipal(identity);
+
+            return principal;
         }
 
         private const string AllCaps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

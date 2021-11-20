@@ -14,7 +14,7 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "[dbo].[User]",
+         "Name": "[dbo].[AppFile]",
          "ObjectType": 0
       }
    ],

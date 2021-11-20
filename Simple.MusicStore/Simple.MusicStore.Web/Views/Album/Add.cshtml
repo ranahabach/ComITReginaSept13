@@ -1,0 +1,23 @@
+﻿@model AddAlbumModel
+@{
+}
+<h1>Add Album</h1>
+
+@using (Html.BeginForm("Add", "Album", FormMethod.Post, new { enctype= "multipart/form-data" }))
+{
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Title, new { CssClass = "form-label" })
+        @Html.TextBoxFor(m => m.Title, new { CssClass = "form-control" })
+    </div>
+    <div class="mb-3">
+        @Html.LabelFor(m => m.Artist, new { CssClass = "form-label" })
+        @Html.TextBoxFor(m => m.Artist, new { CssClass = "form-control" })
+    </div>
+    <div class="mb-3">
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" class="form-control">
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Add" class="btn btn-primary"/>
+    </div>
+}

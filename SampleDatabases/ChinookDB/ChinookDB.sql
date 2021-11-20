@@ -153,11 +153,23 @@ CREATE TABLE [dbo].[Track]
 GO
 CREATE TABLE [dbo].[User]
 (
-    [UserId] INT NOT NULL,
+    [UserId] INT IDENTITY(1,1) NOT NULL,
     [LastName] NVARCHAR(20) NOT NULL,
     [FirstName] NVARCHAR(20) NOT NULL,
-    [Email] NVARCHAR(60),
+    [Email] NVARCHAR(60) NOT NULL,
+    [Password] NVARCHAR(250) NOT NULL,
+    [IsAdmin] INT NULL,
     CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([UserId])
+);
+GO
+
+CREATE TABLE [dbo].[AppFile]
+(
+    [FileId] INT IDENTITY(1,1) NOT NULL,
+    [Path] NVARCHAR(250) NOT NULL,
+    [ContentType] NVARCHAR(250) NOT NULL,
+    [FileContents] NVARCHAR(MAX) NOT NULL,
+    CONSTRAINT [PK_AppFile] PRIMARY KEY CLUSTERED ([FileId])
 );
 GO
 

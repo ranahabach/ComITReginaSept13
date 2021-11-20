@@ -1,0 +1,48 @@
+﻿@model AlbumPageModel
+@{
+
+}
+
+<h1>Albums</h1>
+@if (User.IsInRole("Admin"))
+{
+    <td><button class="btn btn-primary">Add</button><a href="@Url.Action("Add")">Add</a></td>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Artist</th>
+            <th scope="col">Songs</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th scope="col">Actions</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var album in Model.Albums)
+        {
+            <tr>
+                <td>
+
+                    <a href="#">
+                        <img height="40px"
+                             width="40px"
+                             src="@Url.Action("Full", "Image", new { imagePath = album.Image })" />
+                    </a>
+                </td>
+                <td>@album.Title</td>
+                <td>@album.Artist</td>
+                <td>@album.TrackCount</td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td><button class="btn btn-primary">Edit</button></td>
+                }
+            </tr>
+        }
+
+    </tbody>
+</table>

@@ -20,6 +20,7 @@ namespace Simple.MusicStore.Web.Data
         {
         }
 
+        public virtual DbSet<AppFile> AppFile { get; set; }
         public virtual DbSet<Album> Album { get; set; }
         public virtual DbSet<Artist> Artist { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
@@ -66,6 +67,8 @@ namespace Simple.MusicStore.Web.Data
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(160);
+
+                entity.Property(e => e.Image);
 
                 entity.HasOne(d => d.Artist)
                     .WithMany(p => p.Album)
@@ -306,6 +309,24 @@ namespace Simple.MusicStore.Web.Data
                     .HasMaxLength(20);
 
                 entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.IsAdmin);
+            });
+
+            modelBuilder.Entity<AppFile>(entity =>
+            {
+                entity.HasKey(e => e.FileId);
+
+                entity.Property(e => e.ContentType)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.FileContents)
+                    .IsRequired();
+
+                entity.Property(e => e.Path)
                     .IsRequired()
                     .HasMaxLength(250);
             });

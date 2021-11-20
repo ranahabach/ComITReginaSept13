@@ -27,6 +27,8 @@ namespace Simple.MusicStore.Web
 
             services.AddScoped<ArtistService>();
             services.AddScoped<UserService>();
+            services.AddScoped<AlbumService>();
+            services.AddScoped<ImageService>();
             services.AddControllersWithViews();
             services.AddAuthentication(options =>
             {

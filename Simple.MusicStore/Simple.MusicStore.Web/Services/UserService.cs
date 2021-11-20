@@ -95,7 +95,7 @@ namespace Simple.MusicStore.Web.Services
                 new Claim(ClaimTypes.AuthenticationMethod, "Native"),
             };
 
-            if (user.Email == "admin@musicstore.com")
+            if (user.IsAdmin.HasValue && user.IsAdmin == 1)
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Admin"));
             }
@@ -103,7 +103,7 @@ namespace Simple.MusicStore.Web.Services
             {
                 claims.Add(new Claim(ClaimTypes.Role, "User"));
             }
-
+            
             var identity = new ClaimsIdentity(claims, scheme);
             
             var principal =  new ClaimsPrincipal(identity);

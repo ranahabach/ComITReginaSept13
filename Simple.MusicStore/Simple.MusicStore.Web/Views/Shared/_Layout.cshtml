@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Security.Claims
+@{
     var isLoggedIn = false;
     if (this.Context.User != null && this.Context.User.Identity != null)
     {
@@ -47,6 +48,13 @@
                             </li>
                         }
                     </ul>
+                    <div>
+                        @if (isLoggedIn)
+                        {
+                            var name = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+                            <span>@name.Value</span>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

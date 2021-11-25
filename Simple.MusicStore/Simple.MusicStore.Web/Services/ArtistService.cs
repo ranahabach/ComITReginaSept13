@@ -1,7 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Dynamic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Simple.MusicStore.Tools.Data;
 using Simple.MusicStore.Web.Data;
 using Simple.MusicStore.Web.Models;
@@ -22,6 +26,40 @@ namespace Simple.MusicStore.Web.Services
         { 
             var all = _context.Artist.Include(a => a.Album).ToList();
             return all;
+        }
+
+        /*
+
+         public string GetArtist(Artist a)
+         {
+            return new { a.Name, a.ArtistId };
+         }
+         
+         */
+
+        private Dictionary<int, string> _artists = new Dictionary<int, string>();
+
+        public IEnumerable<ArtistInfoModel> GetArtistNames()
+        {
+
+            return _context
+                .Artist
+                .Select(a => new ArtistInfoModel() { Id = a.ArtistId, Name = a.Name })
+                .ToList();
+        }
+
+        public IEnumerable<dynamic> GetArtistNamesDynamic()
+        {
+            return _context
+                .Artist
+                .ToList()
+                .Select(a =>
+                {
+                    dynamic e = new ExpandoObject();
+                    e.Id = a.ArtistId;
+                    e.Name = a.Name;
+                    return e;
+                });
         }
 
         public IEnumerable<Artist> GetAllMatching(string searchTerm)

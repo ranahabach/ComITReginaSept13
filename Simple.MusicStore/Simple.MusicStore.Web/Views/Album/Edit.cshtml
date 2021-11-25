@@ -1,0 +1,74 @@
+﻿@model EditAlbumModel
+@{
+}
+
+<h1>Edit Album</h1>
+
+@* @using (Html.BeginForm("Edit", "Album", FormMethod.Post, new { enctype = "multipart/form-data" })) *@
+@* { *@
+<div id="title-section" class="mb-3">
+    @Html.LabelFor(m => m.Title, new { CssClass = "form-label" })
+    @Html.TextBoxFor(m => m.Title, new { CssClass = "form-control" })
+</div>
+<div class="mb-3">
+    @Html.LabelFor(m => m.Artist, new { CssClass = "form-label" })
+    @Html.TextBoxFor(m => m.Artist, new { CssClass = "form-control" })
+    <button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">...</button>
+</div>
+<div class="mb-3">
+    @Html.LabelFor(m => m.Image, new { CssClass = "form-label" })
+    @Html.TextBoxFor(m => m.Image, new { CssClass = "form-control" })
+</div>
+<div class="mb-3">
+    <label for="newImage">Image</label>
+    <input type="file" id="newImage" name="newImage" class="form-control">
+</div>
+<div class="mb-3">
+    <input type="submit" value="Save" class="btn btn-primary" />
+</div>
+@* } *@
+
+<!-- Button trigger modal -->
+@* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> *@
+@*     Launch demo modal *@
+@* </button> *@
+
+<!-- Modal -->
+<div x-data="{ artists:[] }" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Select an Artist</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="artistList">Select an artist</label>
+                    <select multiple class="form-control" id="artistList">
+                        <template x-for="artist in artists">
+                            <option x-text="artist.name"></option>
+                        </template>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    axios.get('/album/artists')
+        .then(function(response) {
+            // handle success
+            console.log(response.data);
+        })
+        .catch(function(error) {
+            // handle error
+            console.log(error);
+        });
+</script>

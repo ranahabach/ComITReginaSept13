@@ -27,7 +27,7 @@ namespace Simple.MusicStore.Web.Services
                 {
                     Image = a.Image,
                     Artist = a.Artist.Name,
-                    Id = a.ArtistId,
+                    Id = a.AlbumId,
                     Title = a.Title,
                     TrackCount = a.Track.Count
                 })
@@ -49,6 +49,14 @@ namespace Simple.MusicStore.Web.Services
             _context.Album.Add(album);
 
             _context.SaveChanges();
+        }
+
+        public Album FindById(int id)
+        {
+            return _context
+                .Album
+                .Include(a => a.Artist)
+                .FirstOrDefault(a => a.AlbumId == id);
         }
     }
 }

@@ -78,5 +78,20 @@ namespace Simple.MusicStore.Web.Controllers
 
             return View();
         }
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var album = _albumService.FindById(id);
+            var model = album.ToModel();
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Artists()
+        {
+            return Json(_artistService.GetArtistNames());
+        }
     }
 }

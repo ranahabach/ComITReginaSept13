@@ -6,7 +6,7 @@
 <h1>Albums</h1>
 @if (User.IsInRole("Admin"))
 {
-    <td><button class="btn btn-primary">Add</button><a href="@Url.Action("Add")">Add</a></td>
+    <td><a href="@Url.Action("Add")" class="btn btn-primary">Add</a></td>
 }
 
 <table class="table">
@@ -39,7 +39,7 @@
                 <td>@album.TrackCount</td>
                 @if (User.IsInRole("Admin"))
                 {
-                    <td><button class="btn btn-primary">Edit</button></td>
+                    <td><a href="@Url.Action("Edit", new { id = album.Id} )" class="btn btn-primary">Edit</a></td>
                 }
             </tr>
         }

@@ -2,6 +2,8 @@
 @{
 }
 
+
+
 <h1>Edit Album</h1>
 
 @* @using (Html.BeginForm("Edit", "Album", FormMethod.Post, new { enctype = "multipart/form-data" })) *@
@@ -10,10 +12,10 @@
     @Html.LabelFor(m => m.Title, new { CssClass = "form-label" })
     @Html.TextBoxFor(m => m.Title, new { CssClass = "form-control" })
 </div>
-<div class="mb-3">
+<div x-data="{}" class="mb-3">
     @Html.LabelFor(m => m.Artist, new { CssClass = "form-label" })
-    @Html.TextBoxFor(m => m.Artist, new { CssClass = "form-control" })
-    <button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">...</button>
+    @Html.TextBoxFor(m => m.Artist, new { CssClass = "form-control", id="artistInput"})
+    <button class="btn btn-secondary" data-toggle="modal" data-target="#artistModal">...</button>
 </div>
 <div class="mb-3">
     @Html.LabelFor(m => m.Image, new { CssClass = "form-label" })
@@ -28,17 +30,12 @@
 </div>
 @* } *@
 
-<!-- Button trigger modal -->
-@* <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> *@
-@*     Launch demo modal *@
-@* </button> *@
-
 <!-- Modal -->
-<div x-data="{ artists:[] }" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div x-init="artists = (await axios.get('/album/artists')).data" x-data="{ artists: [], selectedArtist: '' }" class="modal fade" id="artistModal" tabindex="-1" aria-labelledby="artistModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Select an Artist</h5>
+                <h5 x-ref="title" class="modal-title" id="artistModalLabel">Select an Artist</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -46,7 +43,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="artistList">Select an artist</label>
-                    <select multiple class="form-control" id="artistList">
+                    <select multiple class="form-control" id="artistList" x-on:change="selectedArtist = $el.value; console.log($el.value)">
                         <template x-for="artist in artists">
                             <option x-text="artist.name"></option>
                         </template>
@@ -55,20 +52,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" x-on:click="document.getElementById('artistInput').value = selectedArtist">Confirm</button>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    axios.get('/album/artists')
-        .then(function(response) {
-            // handle success
-            console.log(response.data);
-        })
-        .catch(function(error) {
-            // handle error
-            console.log(error);
-        });
-</script>
+

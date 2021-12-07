@@ -17,7 +17,7 @@ namespace MusicStore.UI
         public static void Main(string[] args)
         {
             AlbumService service = new AlbumService();
-            MusicStoreDatabase db = new MusicStoreDatabase();
+            MusicStoreDbContext db = new MusicStoreDbContext();
             Logger logger = new Logger();
 
             CreateHostBuilder(args).Build().Run();

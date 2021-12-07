@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Dynamic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Simple.MusicStore.Tools.Data;
@@ -62,23 +63,23 @@ namespace Simple.MusicStore.Web.Services
                 });
         }
 
-        public IEnumerable<Artist> GetAllMatching(string searchTerm)
+        public async Task<IEnumerable<Artist>> GetAllMatching(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
-                return _context
+                return await _context
                     .Artist
                     .Take(PAGE_SIZE)
                     .Include(a => a.Album)
                     .Where(a => a.Name == "Carlos")
-                    .ToList();
+                    .ToListAsync();
             }
 
-            var all = _context
+            var all = await _context
                 .Artist
                 .Where(a => a.Name.Contains(searchTerm))
                 .Include(a => a.Album)
-                .ToList();
+                .ToListAsync();
 
             return all;
         }

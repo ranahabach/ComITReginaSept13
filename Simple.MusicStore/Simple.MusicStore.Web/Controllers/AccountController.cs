@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,11 @@ namespace Simple.MusicStore.Web.Controllers
             return  View(new LoginModel());
         }
 
+        private async Task DoSomeWork()
+        {
+            await Task.Run(() => {  });
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
@@ -86,7 +92,7 @@ namespace Simple.MusicStore.Web.Controllers
 
                 return View(errorModel);
             }
-
+            
             // Login the user to application 
             var principal = _userService.CreateUserPrincipal(user, CookieAuthenticationDefaults.AuthenticationScheme);
             

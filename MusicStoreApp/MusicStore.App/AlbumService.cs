@@ -7,7 +7,7 @@ namespace MusicStore.App
     {
         public AlbumService()
         {
-            var db = new MusicStoreDatabase();
+            var db = new MusicStoreDbContext();
         }
     }
 }

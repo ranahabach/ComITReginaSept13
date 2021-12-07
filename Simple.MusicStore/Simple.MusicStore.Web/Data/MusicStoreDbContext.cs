@@ -42,14 +42,17 @@ namespace Simple.MusicStore.Web.Data
                 optionsBuilder
                     .UseSqlServer(LocalDb)
                     .UseLazyLoadingProxies()
-                    .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name },
+                    .LogTo(Console.WriteLine, 
+                        new[] { DbLoggerCategory.Database.Command.Name },
                         LogLevel.Information)
                     .EnableSensitiveDataLogging();
             }
             else
             {
                 optionsBuilder
-                    .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information)
+                    .LogTo(Console.WriteLine, 
+                        new[] { DbLoggerCategory.Database.Command.Name }, 
+                        LogLevel.Information)
                     .EnableSensitiveDataLogging();
             }
         }

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using MusicStore.Db;
 
 namespace MusicStore.UI
 {
@@ -22,6 +24,10 @@ namespace MusicStore.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<MusicStoreDbContext>(option => 
+                option.UseSqlServer(Configuration.GetConnectionString("LocalDbConnection"))
+                    .UseLazyLoadingProxies());
+
             services.AddControllersWithViews();
         }
 

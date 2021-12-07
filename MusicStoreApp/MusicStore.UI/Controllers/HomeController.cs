@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MusicStore.App;
 using MusicStore.Common;
 using MusicStore.Db;
@@ -15,18 +16,26 @@ namespace MusicStore.UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly MusicStoreDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MusicStoreDbContext context)
         {
             AlbumService service = new AlbumService();
-            MusicStoreDatabase db = new MusicStoreDatabase();
             Logger loggerOne = new Logger();
 
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            var a = _context.Artists.FirstOrDefault(a => a.Name == "Charlie Puth");
+
+            foreach (var album in a.Albums)
+            {
+                Console.WriteLine(album.Title);
+            }
+
             return View();
         }
 

@@ -45,13 +45,13 @@ namespace Simple.MusicStore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddAlbumModel model, IFormFile image)
+        public async Task<IActionResult> Add(AddAlbumModel model, IFormFile image)
         {
             if (ModelState.IsValid)
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    image.CopyTo(memoryStream);
+                    await Task.Run(() => image.CopyTo(memoryStream));
                     var imageBytes = memoryStream.ToArray();
                     var imageFile = new AppFile()
                     {
@@ -59,9 +59,10 @@ namespace Simple.MusicStore.Web.Controllers
                         Path = $"/albums/{image.FileName}",
                         FileContents = Convert.ToBase64String(imageBytes)
                     };
-                    _imageService.Add(imageFile);
 
-                    var artist = _artistService.GetAllMatching(model.Artist).First();
+                    await _imageService.Add(imageFile);
+
+                    var artist = (await _artistService.GetAllMatching(model.Artist)).First();
 
                     var album = new Album()
                     {

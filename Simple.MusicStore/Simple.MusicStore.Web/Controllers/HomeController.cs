@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -48,9 +49,9 @@ namespace Simple.MusicStore.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string search, int page)
+        public async Task<IActionResult> Index(string search, int page)
         {
-            var artists = _artistService.GetAllMatching(search).ToList();
+            var artists = (await _artistService.GetAllMatching(search)).ToList();
             var model = new HomePageModel()
             {
                 Artists = artists,
